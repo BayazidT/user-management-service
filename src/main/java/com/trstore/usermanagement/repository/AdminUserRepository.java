@@ -1,6 +1,6 @@
-package com.trstore.trstoreapi.repository;
+package com.trstore.usermanagement.repository;
 
-import com.trstore.trstoreapi.entity.AdminUserEntity;
+import com.trstore.usermanagement.entity.AdminUserEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.UUID;

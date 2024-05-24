@@ -1,0 +1,17 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/tr-store
+#    url: jdbc:postgresql://host.docker.internal:5432/tr-store
+    username: postgres
+    password:
+    hikari:
+      schema: user_management
+  flyway:
+    locations: classpath:db/migration
+    baselineOnMigrate: true
+server:
+  port: 8088
+
+
+
+

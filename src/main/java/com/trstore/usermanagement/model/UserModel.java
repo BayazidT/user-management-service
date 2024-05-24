@@ -1,4 +1,4 @@
-package com.trstore.trstoreapi.model;
+package com.trstore.usermanagement.model;
 
 
 import lombok.AllArgsConstructor;

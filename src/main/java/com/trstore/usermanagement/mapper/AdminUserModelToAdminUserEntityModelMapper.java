@@ -1,9 +1,8 @@
-package com.trstore.trstoreapi.mapper;
+package com.trstore.usermanagement.mapper;
 
 
-import com.trstore.trstoreapi.entity.AdminUserEntity;
-import com.trstore.trstoreapi.model.UserModel;
-import com.trstore.trstoreapi.model.UserResponseModel;
+import com.trstore.usermanagement.entity.AdminUserEntity;
+import com.trstore.usermanagement.model.UserModel;
 import org.mapstruct.Mapper;
 import org.mapstruct.MappingConstants;
 import org.mapstruct.ReportingPolicy;

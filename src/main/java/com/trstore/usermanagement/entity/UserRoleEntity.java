@@ -1,4 +1,4 @@
-package com.trstore.trstoreapi.entity;
+package com.trstore.usermanagement.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;

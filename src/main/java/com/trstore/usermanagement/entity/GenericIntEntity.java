@@ -1,4 +1,4 @@
-package com.trstore.trstoreapi.entity;
+package com.trstore.usermanagement.entity;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -8,8 +8,6 @@ import lombok.Setter;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Parameter;
 import org.hibernate.id.enhanced.SequenceStyleGenerator;
-
-import java.util.UUID;
 
 @Getter
 @Setter
