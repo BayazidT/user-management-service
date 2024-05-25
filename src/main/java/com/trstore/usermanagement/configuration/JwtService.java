@@ -1,21 +1,25 @@
 package com.trstore.usermanagement.configuration;
 
+import com.trstore.usermanagement.entity.AdminUserEntity;
+import com.trstore.usermanagement.repository.AdminUserRepository;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
+import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 import java.security.Key;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 import java.util.function.Function;
+import java.util.stream.Collectors;
 
 @Service
+@RequiredArgsConstructor
 public class JwtService {
     private static final String SECRET_KEY = "51655368566D597133743677397A24432646294A404E635266556A576E5A7234";
+    private final AdminUserRepository userRepository;
 
     public String extractUsername(String token) {
         return extractClaim(token, Claims::getSubject);
@@ -30,6 +34,7 @@ public class JwtService {
     }
 
     public String generateToken(Map<String, Object> extraClaims, UserDetails userDetails){
+        extraClaims.put("userAttributes", getUserAttributes(userDetails));
         return Jwts
                 .builder()
                 .setClaims(extraClaims)
@@ -63,5 +68,20 @@ public class JwtService {
     private Key getSignInKey() {
         byte[] keyBytes = Decoders.BASE64.decode(SECRET_KEY);
         return Keys.hmacShaKeyFor(keyBytes);
+    }
+    private AdminUserEntity getUserInformation(String username){
+        AdminUserEntity userEntity = (AdminUserEntity) userRepository.findByUsername(username).orElseThrow();
+        return userEntity;
+    }
+
+    private Map<String, Object> getUserAttributes(UserDetails userDetails) {
+        AdminUserEntity userEntity = getUserInformation(userDetails.getUsername());
+        Map<String, Object> attributes = new HashMap<>();
+        attributes.put("user_id", userEntity.getId());
+        attributes.put("firstName", userEntity.getFirstName());
+        attributes.put("lastName", userEntity.getLastName());
+        attributes.put("email", userEntity.getEmail());
+        attributes.put("role", userEntity.getUserRoleEntities().getRoleEntities().getName());
+        return attributes;
     }
 }
